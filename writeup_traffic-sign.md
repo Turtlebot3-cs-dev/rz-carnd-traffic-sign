@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./my_images/sample_rgb.png "Dataset Sample"
 [image2]: ./my_images/count_each_sign.png "Dataset Distribution"
-[image3]: ./my_images/count_each_sign.png "Augmented Dataset Distribution"
+[image3]: ./my_images/count_each_sign2.png "Augmented Dataset Distribution"
 
 [image13]: ./my_images/shuffle_correct.png "Properly shuffled Images"
 [image14]: ./my_images/my_model_AllCNN.jpg "Model Architecture"
@@ -118,6 +118,7 @@ Where in my code:
 ####2. Unbalanced data set. I have used augmented data. On my limited free time I could not spent much time better understanding yet the opencv functions used to generate the augmented data, yet, so I have mostly directly applied it. Thanks for the functions made available by [Vivek Yadav](https://medium.com/@vivek.yadav/dealing-with-unbalanced-data-generating-additional-data-by-jittering-the-original-image-7497fe2119c3#.t2tjvnix2).  I have balanced the data to 1800 samples for each class.
 
 Here is the augmented training set summary. 
+
 | Parameter         	        	| Description	        						| 
 |-----------------------------------|-----------------------------------------------| 
 | Image shape                       | 32x32x3 RGB image   					| 
@@ -127,7 +128,7 @@ Here is the augmented training set summary.
 * Step 2: Design and Test a Model Architecture
 * *Pre-process the Data Set (jittering, normalization, etc.)
 
-Here is the training data set histogram per class:
+Here is the augmented and balanced training data set histogram per class:
 
 ![alt text][image3]
 
@@ -143,13 +144,13 @@ Here is the sequence of shuffled data set:
 ***
 ###Model Architecture
 
-####1.  I have started with traditional architectures, alternating convolution and max-pooling layers followed by a small number of fully connected layers, but end up with all conv net model inspired by:
-[Jost Tobias Springenberg, Alexey Dosovitskiy, Thomas Brox, Martin Riedmiller](https://arxiv.org/pdf/1412.6806.pdf):
-"STRIVING FOR SIMPLICITY: THE ALL CONVOLUTIONAL NET" 
+####1.  I have started with traditional architectures, alternating convolution and max-pooling layers followed by a small number of fully connected layers, but end up with all conv net model inspired by [Jost Tobias Springenberg, Alexey Dosovitskiy, Thomas Brox, Martin Riedmiller](https://arxiv.org/pdf/1412.6806.pdf)
+
 ####This model does not use fully connected layers before the classifier, it uses 1x1 convolutions instead:
 >*"...This leads to predictions of object classes at different positions which can then simply be averaged over the whole image. This scheme was first described by Lin et al. (2014) and further regularizes the network as the one by one convolution has much less parameters than a fully connected layer..."*
 
 ####Methods I have tried includes:
+
 * RGB 3 channels vs Grayscale 1 channel
 * Normalization (128 vs zero-centered vs 255)
 * Batch normalization
@@ -158,6 +159,7 @@ Here is the sequence of shuffled data set:
 * Learning rate decay
 * Inception modules
 * Spatial transformers 
+
 ####It was an intensive learning from all those applications. I am still on the surface of some of those methods like inceptions and spatial transformers but it was good enough to get the intuition and get my feet wet.
 
 Here is the model:
@@ -300,7 +302,7 @@ def fc_reluBatchN(x, W, b, output_depth):
 * Step 2: Design and Test a Model Architecture
 * *Train, Validate and Test the Model
 
-####3. First I have tried to over fit a small sample of the training to evaluate the model efficiency as recommended by [CS231n Winter 2016: Lecture 5: Neural Networks Part 2](https://www.youtube.com/watch?v=gYpoJMlgyXA&index=10&list=PLFznuEIsFrh7j2ARuJzbDRb5iZip3rlNR&t=2059s) and also implemented by [Muddassir Ahmed](https://medium.com/@muddassirahmed/german-traffic-sign-classification-using-deep-learning-219c53fba329#.64ca6z3i3). 20 images sample has been over fitted.
+####3. I have over fitted a small sample of the training to evaluate the model efficiency as recommended by [CS231n Winter 2016: Lecture 5: Neural Networks Part 2](https://www.youtube.com/watch?v=gYpoJMlgyXA&index=10&list=PLFznuEIsFrh7j2ARuJzbDRb5iZip3rlNR&t=2059s) and also implemented by [Muddassir Ahmed](https://medium.com/@muddassirahmed/german-traffic-sign-classification-using-deep-learning-219c53fba329#.64ca6z3i3). 20 images sample has been over fitted.
 
  Where in my code:
 * Step 2: Design and Test a Model Architecture
